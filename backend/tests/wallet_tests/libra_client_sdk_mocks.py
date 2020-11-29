@@ -7,12 +7,12 @@ from dataclasses import dataclass, field
 from typing import Optional, Dict, List, Union, Tuple, cast
 
 import requests
-from libra.identifier import decode_account
-from libra.jsonrpc import Event
-from libra.testnet import DESIGNATED_DEALER_ADDRESS
-from libra.txnmetadata import general_metadata
-from libra.utils import account_address_bytes, account_address_hex
-from libra_utils.types.currencies import LibraCurrency
+from diem.identifier import decode_account
+from diem.jsonrpc import Event
+from diem.testnet import DESIGNATED_DEALER_ADDRESS
+from diem.txnmetadata import general_metadata
+from diem.utils import account_address_bytes, account_address_hex
+from diem_utils.types.currencies import DiemCurrency
 from tests.wallet_tests import ASSOC_AUTHKEY
 from wallet.services.transaction import process_incoming_transaction
 
@@ -119,7 +119,7 @@ class TransactionsMocker(BlockchainMock):
 
     def send_transaction(
         self,
-        currency: LibraCurrency,
+        currency: DiemCurrency,
         amount: int,
         dest_vasp_address: str,
         dest_sub_address: str,
@@ -161,7 +161,7 @@ class FaucetUtilsMock(BlockchainMock):
             receiver_address=authkey_hex,
             sequence=sequence,
             amount=amount,
-            currency=LibraCurrency.Coin1,
+            currency=DiemCurrency.Coin1,
             metadata=metadata,
         )
 

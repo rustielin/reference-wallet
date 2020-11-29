@@ -7,13 +7,13 @@ from typing import Optional
 from uuid import UUID
 
 import context
-from libra import utils
-from libra.identifier import decode_account
-from libra_utils.sdks.liquidity import LpClient
-from libra_utils.types.currencies import LibraCurrency
-from libra_utils.types.liquidity.currency import Currency, CurrencyPairs, CurrencyPair
-from libra_utils.types.liquidity.quote import QuoteData
-from libra_utils.types.liquidity.trade import TradeStatus, TradeData, TradeId
+from diem import utils
+from diem.identifier import decode_account
+from diem_utils.sdks.liquidity import LpClient
+from diem_utils.types.currencies import DiemCurrency
+from diem_utils.types.liquidity.currency import Currency, CurrencyPairs, CurrencyPair
+from diem_utils.types.liquidity.quote import QuoteData
+from diem_utils.types.liquidity.trade import TradeStatus, TradeData, TradeId
 from wallet.logging import log_execution
 from wallet.services import INVENTORY_ACCOUNT_NAME
 from wallet.services.account import get_deposit_address, create_account
@@ -183,7 +183,7 @@ def _transfer_funds_to_lp(order: Order) -> int:
     tx = send_transaction(
         sender_id=inventory_account,
         amount=order.amount,
-        currency=LibraCurrency[order.base_currency],
+        currency=DiemCurrency[order.base_currency],
         destination_address=lp_details.vasp,
         destination_subaddress=lp_details.sub_address,
     )

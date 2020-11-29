@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from libra.txnmetadata import general_metadata
+from diem.txnmetadata import general_metadata
 from sqlalchemy_paginator import Paginator
 from tests.wallet_tests.libra_client_sdk_mocks import (
     MockEventData,

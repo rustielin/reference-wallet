@@ -5,7 +5,7 @@ import os, time, typing
 import random
 import requests
 from dataclasses import dataclass
-from libra_utils.types.currencies import LibraCurrency, FiatCurrency
+from diem_utils.types.currencies import DiemCurrency, FiatCurrency
 
 LRW_WEB_1 = os.getenv("LRW_WEB_1")
 LRW_WEB_2 = os.getenv("LRW_WEB_2")

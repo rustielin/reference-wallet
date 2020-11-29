@@ -5,14 +5,14 @@ import typing
 
 from os import getenv, environ
 from dataclasses import dataclass
-from libra import libra_types, testnet, utils, LocalAccount, identifier
+from diem import diem_types, testnet, utils, LocalAccount, identifier
 from offchainapi.libra_address import LibraAddress
 from offchainapi.crypto import ComplianceKey
 
 
 @dataclass
 class Config:
-    # vasp_address should be address for a libra ParentVASP account
+    # vasp_address should be address for a ParentVASP account
     vasp_address: str
     wallet_custody_account_name: str
     vasp_compliance_key: str
@@ -22,7 +22,7 @@ class Config:
     chain_id: int
     gas_currency_code: str
 
-    def vasp_account_address(self) -> libra_types.AccountAddress:
+    def vasp_account_address(self) -> diem_types.AccountAddress:
         return utils.account_address(self.vasp_address)
 
     def vasp_libra_address(self) -> LibraAddress:

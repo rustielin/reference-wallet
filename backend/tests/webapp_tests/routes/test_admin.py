@@ -8,7 +8,7 @@ from flask import Response
 from flask.testing import Client
 
 import wallet.services.user
-from libra_utils.types.currencies import FiatCurrency
+from diem_utils.types.currencies import FiatCurrency
 from wallet.services.user import UsersFilter
 from wallet.storage import (
     RegistrationStatus,

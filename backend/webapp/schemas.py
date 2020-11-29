@@ -6,13 +6,13 @@ from itertools import chain
 from marshmallow import Schema, fields
 from marshmallow.validate import OneOf, Range
 
-from libra_utils.types.currencies import LibraCurrency, FiatCurrency
+from diem_utils.types.currencies import DiemCurrency, FiatCurrency
 from wallet.types import TransactionDirection, TransactionStatus
 
 SUPPORTED_CONVERSIONS = [
     f"{base}_{quote}"
-    for base in LibraCurrency
-    for quote in chain(list(FiatCurrency.__members__), list(LibraCurrency.__members__))
+    for base in DiemCurrency
+    for quote in chain(list(FiatCurrency.__members__), list(DiemCurrency.__members__))
 ]
 
 
@@ -49,7 +49,7 @@ def libra_currency_code_field(**kwargs) -> fields.Field:
     """Defines Libra currency code schema field"""
     return fields.Str(
         description="Libra currency code",
-        validate=OneOf(list(LibraCurrency.__members__)),
+        validate=OneOf(list(DiemCurrency.__members__)),
         **kwargs,
     )
 

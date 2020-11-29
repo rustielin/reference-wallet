@@ -8,7 +8,7 @@ from http import HTTPStatus
 import pytest
 from flask import Response
 from flask.testing import Client
-from libra_utils.types.currencies import Currencies
+from diem_utils.types.currencies import Currencies
 from wallet.services import order as order_service
 from wallet.storage import Order
 from wallet.types import OrderId, Direction

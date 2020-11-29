@@ -5,8 +5,8 @@
 
 # from datetime import datetime
 #
-# from libra_utils.types.liquidity import Currency, LpClient
-# from libra_utils.types.liquidity import (
+# from diem_utils.types.liquidity import Currency, LpClient
+# from diem_utils.types.liquidity import (
 #     trade_to_debt,
 #     Trade,
 #     Quote,
@@ -14,8 +14,8 @@
 #     Settlement,
 #     Session,
 # )
-# from libra_utils.types.liquidity import CurrencyPairs
-# from libra_utils.types.liquidity import Direction, TradeStatus
+# from diem_utils.types.liquidity import CurrencyPairs
+# from diem_utils.types.liquidity import Direction, TradeStatus
 #
 #
 # def make_trade(pair: CurrencyPairs, direction: Direction, amount=1000):

@@ -5,7 +5,7 @@
 
 import pytest
 
-from libra_utils.types.liquidity.currency import CurrencyPairs, Currency
+from diem_utils.types.liquidity.currency import CurrencyPairs, Currency
 from wallet.services.fx.fx import get_rate
 
 rates = {

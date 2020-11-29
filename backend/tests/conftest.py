@@ -12,17 +12,17 @@ from typing import Dict, Optional, List, Generator
 from uuid import uuid4
 
 import pytest
-from libra.jsonrpc import Client as LibraClient, Transaction, TransactionData
-from libra.testnet import Faucet
-from libra.txnmetadata import general_metadata
-from libra import libra_types, identifier
+from diem.jsonrpc import Client as LibraClient, Transaction, TransactionData
+from diem.testnet import Faucet
+from diem.txnmetadata import general_metadata
+from diem import diem_types, identifier
 
-from libra_utils.types.liquidity.currency import CurrencyPair
-from libra_utils.types.liquidity.lp import LPDetails
-from libra_utils.types.liquidity.quote import QuoteId, QuoteData, Rate
-from libra_utils.types.liquidity.settlement import DebtData
-from libra_utils.types.liquidity.trade import TradeId, TradeData, Direction, TradeStatus
-from libra_utils.sdks.liquidity import LpClient
+from diem_utils.types.liquidity.currency import CurrencyPair
+from diem_utils.types.liquidity.lp import LPDetails
+from diem_utils.types.liquidity.quote import QuoteId, QuoteData, Rate
+from diem_utils.types.liquidity.settlement import DebtData
+from diem_utils.types.liquidity.trade import TradeId, TradeData, Direction, TradeStatus
+from diem_utils.sdks.liquidity import LpClient
 
 from tests.setup import clear_db
 from tests.wallet_tests.libra_client_sdk_mocks import (
@@ -128,7 +128,7 @@ class LpClientMock:
     ) -> TradeId:
         quote = LpClientMock.QUOTES[quote_id]
         trade_id = TradeId(uuid4())
-        metadata = libra_types.Metadata__Undefined()
+        metadata = diem_types.Metadata__Undefined()
         if libra_deposit_address is not None:
             addr, subaddr = identifier.decode_account(libra_deposit_address, "tlb")
             metadata = general_metadata(to_subaddress=subaddr)

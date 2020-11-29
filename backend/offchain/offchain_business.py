@@ -27,7 +27,7 @@ from wallet.storage.user import get_user_by_account_id
 from wallet.services.kyc import get_user_kyc_info, get_additional_user_kyc_info
 from wallet.services.transaction import start_settle_offchain
 from wallet.types import TransactionType, TransactionStatus
-from libra_utils.types.currencies import LibraCurrency
+from diem_utils.types.currencies import DiemCurrency
 import logging
 
 from context import Context
@@ -280,7 +280,7 @@ class LRW(BusinessContext):
                 ).get_subaddress_hex()
                 txn_id = add_transaction(
                     amount=payment.action.amount,
-                    currency=LibraCurrency(payment.action.currency),
+                    currency=DiemCurrency(payment.action.currency),
                     payment_type=TransactionType.OFFCHAIN,
                     status=TransactionStatus.READY_FOR_ON_CHAIN,
                     source_id=None,

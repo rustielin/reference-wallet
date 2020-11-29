@@ -9,9 +9,9 @@ import uuid
 from datetime import datetime, timedelta
 from typing import Optional
 
-from libra_utils.precise_amount import Amount
-from libra_utils.types.currencies import LibraCurrency, Currencies
-from libra_utils.types.liquidity.currency import Currency, CurrencyPair, CurrencyPairs
+from diem_utils.precise_amount import Amount
+from diem_utils.types.currencies import DiemCurrency, Currencies
+from diem_utils.types.liquidity.currency import Currency, CurrencyPair, CurrencyPairs
 from wallet import services
 from wallet import storage
 from wallet.services import inventory, INVENTORY_ACCOUNT_NAME
@@ -160,7 +160,7 @@ def execute_trade(order: Order):
     user_account_id = get_user(order.user_id).account.id
     order_id = typing.cast(OrderId, order.id)
 
-    base_libra_currency = LibraCurrency[order.base_currency]
+    base_libra_currency = DiemCurrency[order.base_currency]
 
     if Direction[order.direction] == Direction.Buy:
         sender_id = inventory_account_id
@@ -200,9 +200,9 @@ def execute_convert(order: Order) -> ConvertResult:
     order_id = typing.cast(OrderId, order.id)
 
     from_amount = order.amount
-    from_libra_currency = LibraCurrency[order.base_currency]
+    from_libra_currency = DiemCurrency[order.base_currency]
     to_amount = order.exchange_amount
-    to_libra_currency = LibraCurrency[order.quote_currency]
+    to_libra_currency = DiemCurrency[order.quote_currency]
 
     if not validate_balance(
         sender_id=user_account, amount=from_amount, currency=from_libra_currency

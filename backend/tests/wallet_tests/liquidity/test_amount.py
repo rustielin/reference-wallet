@@ -3,7 +3,7 @@
 # Copyright (c) The Libra Core Contributors
 # SPDX-License-Identifier: Apache-2.0
 
-from libra_utils.precise_amount import Amount
+from diem_utils.precise_amount import Amount
 
 ONE_LIBRA = Amount().deserialize(1000000)
 TWO_LIBRA = Amount().deserialize(2000000)

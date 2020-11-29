@@ -11,7 +11,7 @@ import json
 
 from wallet.background_tasks.background import process_incoming_txn
 from .types import LRWPubSubEvent
-from libra import jsonrpc
+from diem import jsonrpc
 
 
 class FileProgressStorage:

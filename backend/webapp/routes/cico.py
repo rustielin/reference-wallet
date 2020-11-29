@@ -12,9 +12,9 @@ from uuid import UUID
 from flask import Blueprint, request
 from itertools import chain
 
-from libra_utils.precise_amount import Amount
-from libra_utils.types.currencies import LibraCurrency, FiatCurrency
-from libra_utils.types.liquidity.currency import Currency
+from diem_utils.precise_amount import Amount
+from diem_utils.types.currencies import DiemCurrency, FiatCurrency
+from diem_utils.types.liquidity.currency import Currency
 from wallet.services import order as order_service
 from wallet.services.fx.fx import get_rate
 from wallet.types import OrderId, Direction
@@ -127,9 +127,9 @@ class CicoRoutes:
 
         def get(self):
             rates = []
-            for base_currency in LibraCurrency:
+            for base_currency in DiemCurrency:
                 for quote_currency in chain(
-                    list(FiatCurrency.__members__), list(LibraCurrency.__members__)
+                    list(FiatCurrency.__members__), list(DiemCurrency.__members__)
                 ):
                     if base_currency == quote_currency:
                         continue

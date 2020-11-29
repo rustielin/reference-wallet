@@ -5,7 +5,7 @@
 
 from datetime import datetime, timedelta
 
-from libra_utils.types.liquidity.currency import Currency
+from diem_utils.types.liquidity.currency import Currency
 from wallet.storage import User, Order, Transaction
 from wallet.types import (
     RegistrationStatus,
@@ -14,7 +14,7 @@ from wallet.types import (
     CoverStatus,
     OrderType,
 )
-from libra_utils.types.currencies import FiatCurrency
+from diem_utils.types.currencies import FiatCurrency
 
 username = "test-user"
 

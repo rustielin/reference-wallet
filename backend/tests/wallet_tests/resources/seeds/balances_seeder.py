@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 from typing import Tuple
 from uuid import UUID
 
-from libra_utils.types.liquidity.currency import Currency
+from diem_utils.types.liquidity.currency import Currency
 from tests.wallet_tests.resources.seeds import prototypes
 from wallet.services import INVENTORY_ACCOUNT_NAME
 from wallet.storage import Order, Account, Transaction
@@ -22,7 +22,7 @@ from wallet.types import (
     OrderId,
     Balance,
 )
-from libra_utils.types.currencies import LibraCurrency, FiatCurrency
+from diem_utils.types.currencies import DiemCurrency, FiatCurrency
 
 
 class BalancesSeeder:

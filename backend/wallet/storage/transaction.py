@@ -11,12 +11,12 @@ from sqlalchemy import func, and_, or_
 from . import db_session, get_user
 from .models import Transaction, TransactionLog, OffChain
 from ..types import TransactionStatus, TransactionType
-from libra_utils.types.currencies import LibraCurrency
+from diem_utils.types.currencies import DiemCurrency
 
 
 def add_transaction(
     amount: int,
-    currency: LibraCurrency,
+    currency: DiemCurrency,
     payment_type: TransactionType,
     status: TransactionStatus,
     source_id: int = None,
@@ -121,7 +121,7 @@ def save_transaction_log(transaction_id, log) -> None:
 
 
 def get_account_transactions(
-    account_id: int, currency: Optional[LibraCurrency] = None, up_to_version=None
+    account_id: int, currency: Optional[DiemCurrency] = None, up_to_version=None
 ) -> List[Transaction]:
     query = Transaction.query.filter(
         or_(
@@ -130,7 +130,7 @@ def get_account_transactions(
         ),
     )
     if currency:
-        query = query.filter_by(currency=LibraCurrency(currency))
+        query = query.filter_by(currency=DiemCurrency(currency))
 
     if up_to_version:
         query = query.filter(Transaction.blockchain_version <= up_to_version)
@@ -155,7 +155,7 @@ def get_user_transactions(user_id, currency=None):
     )
 
     if currency:
-        query = query.filter_by(currency=LibraCurrency(currency))
+        query = query.filter_by(currency=DiemCurrency(currency))
 
     return query.order_by(Transaction.id.desc()).all()
 

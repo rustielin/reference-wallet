@@ -3,8 +3,8 @@
 
 from typing import Optional
 
-from libra import libra_types
-from libra_utils.types.currencies import LibraCurrency
+from diem import diem_types
+from diem_utils.types.currencies import DiemCurrency
 from wallet.services import account as account_service
 from wallet.services.risk import risk_check
 from . import INVENTORY_ACCOUNT_NAME
@@ -56,12 +56,12 @@ class InvalidTravelRuleMetadata(Exception):
 
 def decode_general_metadata_v0(
     metadata_bytes: bytes,
-) -> Optional[libra_types.GeneralMetadataV0]:
-    metadata = libra_types.Metadata.lcs_deserialize(metadata_bytes)
+) -> Optional[diem_types.GeneralMetadataV0]:
+    metadata = diem_types.Metadata.lcs_deserialize(metadata_bytes)
 
-    if isinstance(metadata, libra_types.Metadata__GeneralMetadata):
+    if isinstance(metadata, diem_types.Metadata__GeneralMetadata):
         if isinstance(
-            metadata.value, libra_types.GeneralMetadata__GeneralMetadataVersion0
+            metadata.value, diem_types.GeneralMetadata__GeneralMetadataVersion0
         ):
             return metadata.value.value
     raise None
@@ -73,8 +73,8 @@ def process_incoming_transaction(
     receiver_address: str,
     sequence: int,
     amount: int,
-    currency: LibraCurrency,
-    metadata: libra_types.Metadata,
+    currency: DiemCurrency,
+    metadata: diem_types.Metadata,
 ):
     logger.info(
         f"process_incoming_transaction: sender: {sender_address}, receiver: {receiver_address}, seq: {sequence}, amount: {amount}"
@@ -84,8 +84,8 @@ def process_incoming_transaction(
     sender_subaddress = None
     receiver_subaddr = None
 
-    if isinstance(metadata, libra_types.Metadata__GeneralMetadata) and isinstance(
-        metadata.value, libra_types.GeneralMetadata__GeneralMetadataVersion0
+    if isinstance(metadata, diem_types.Metadata__GeneralMetadata) and isinstance(
+        metadata.value, diem_types.GeneralMetadata__GeneralMetadataVersion0
     ):
         general_v0 = metadata.value.value
 
@@ -96,8 +96,8 @@ def process_incoming_transaction(
         if general_v0.from_subaddress:
             sender_subaddress = general_v0.from_subaddress.hex()
 
-    if isinstance(metadata, libra_types.Metadata__TravelRuleMetadata) and isinstance(
-        metadata.value, libra_types.TravelRuleMetadata__TravelRuleMetadataVersion0
+    if isinstance(metadata, diem_types.Metadata__TravelRuleMetadata) and isinstance(
+        metadata.value, diem_types.TravelRuleMetadata__TravelRuleMetadataVersion0
     ):
         travel_rule_v0 = metadata.value.value
         reference_id = travel_rule_v0.off_chain_reference_id
@@ -172,7 +172,7 @@ def process_incoming_transaction(
 def send_transaction(
     sender_id: int,
     amount: int,
-    currency: LibraCurrency,
+    currency: DiemCurrency,
     destination_address: str,
     destination_subaddress: Optional[str] = None,
     payment_type: Optional[TransactionType] = None,
@@ -324,7 +324,7 @@ def get_transaction_direction(
     raise LookupError("Couldn't determine transaction direction")
 
 
-def validate_balance(sender_id: int, amount: int, currency: LibraCurrency) -> bool:
+def validate_balance(sender_id: int, amount: int, currency: DiemCurrency) -> bool:
     account_balance = account_service.get_account_balance_by_id(account_id=sender_id)
     return amount <= account_balance.total[currency]
 
@@ -333,7 +333,7 @@ def internal_transaction(
     sender_id: int,
     receiver_id: int,
     amount: int,
-    currency: LibraCurrency,
+    currency: DiemCurrency,
     payment_type: TransactionType,
 ) -> Transaction:
     """Transfer transaction between accounts in the LRW internal ledger."""
@@ -375,7 +375,7 @@ def external_transaction(
     receiver_address: str,
     receiver_subaddress: str,
     amount: int,
-    currency: LibraCurrency,
+    currency: DiemCurrency,
     payment_type: TransactionType,
 ) -> Transaction:
     logger.info(
@@ -419,7 +419,7 @@ def external_offchain_transaction(
     receiver_address: str,
     receiver_subaddress: str,
     amount: int,
-    currency: LibraCurrency,
+    currency: DiemCurrency,
     payment_type: TransactionType,
     original_payment_reference_id: Optional[str] = None,
     description: Optional[str] = None,
@@ -530,7 +530,7 @@ def settle_offchain(transaction_id: int) -> None:
         and transaction.type == TransactionType.OFFCHAIN
     ):
         try:
-            libra_currency = LibraCurrency[transaction.currency]
+            libra_currency = DiemCurrency[transaction.currency]
             logger.info(
                 f"==============starting submit_onchain {libra_currency}, {transaction.amount}, "
                 f"{transaction.destination_address}, {transaction.destination_subaddress}, "
@@ -569,7 +569,7 @@ def submit_onchain(transaction_id: int) -> None:
     transaction = get_transaction(transaction_id)
     if transaction.status == TransactionStatus.PENDING:
         try:
-            libra_currency = LibraCurrency[transaction.currency]
+            libra_currency = DiemCurrency[transaction.currency]
 
             jsonrpc_txn = context.get().p2p_by_general(
                 currency=libra_currency.value,

@@ -6,7 +6,7 @@ from offchain import client
 
 from offchainapi.payment import Status
 
-from libra_utils.types.currencies import LibraCurrency
+from diem_utils.types.currencies import DiemCurrency
 from wallet.services.account import generate_new_subaddress
 from wallet.services.transaction import send_transaction
 from wallet.types import TransactionStatus
@@ -25,7 +25,7 @@ def test_send_payment_between_vasps(lrw1, lrw2, vasp1, vasp2, user1, user2):
     txn = send_transaction(
         sender_id=user1.account_id,
         amount=2_000_000_000,
-        currency=LibraCurrency.Coin1,
+        currency=DiemCurrency.Coin1,
         destination_address=receiver_address.get_onchain_address_hex(),
         destination_subaddress=receiver_subaddress,
     )

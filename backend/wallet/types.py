@@ -7,7 +7,7 @@ from enum import Enum
 from typing import Optional, Dict, NewType
 from uuid import UUID
 
-from libra_utils.types.currencies import LibraCurrency, FiatCurrency
+from diem_utils.types.currencies import DiemCurrency, FiatCurrency
 
 OrderId = NewType("OrderId", UUID)
 
@@ -176,11 +176,11 @@ class OrderType(str, Enum):
 
 class Balance:
     def __init__(self):
-        self.total: Dict[LibraCurrency, int] = {
-            LibraCurrency.Coin1: 0,
+        self.total: Dict[DiemCurrency, int] = {
+            DiemCurrency.Coin1: 0,
         }
-        self.frozen: Dict[LibraCurrency, int] = {
-            LibraCurrency.Coin1: 0,
+        self.frozen: Dict[DiemCurrency, int] = {
+            DiemCurrency.Coin1: 0,
         }
 
 

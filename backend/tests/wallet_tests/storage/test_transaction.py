@@ -6,7 +6,7 @@ from tests.wallet_tests.services.system.utils import (
 from wallet.storage import Transaction
 from wallet.storage import (
     get_account_transactions,
-    LibraCurrency,
+    DiemCurrency,
 )
 
 OTHER_ADDRESS_1 = "257e50b131150fdb56aeab4ebe4ec2b9"
@@ -75,7 +75,7 @@ def test_get_account_transactions():
     print(transactions)
 
     transactions = get_account_transactions(
-        account_id=user.account.id, currency=LibraCurrency.Coin1
+        account_id=user.account.id, currency=DiemCurrency.Coin1
     )
 
     assert len(transactions) == 5
@@ -131,7 +131,7 @@ def test_get_account_transactions_tp_to_version():
     )
 
     transactions = get_account_transactions(
-        account_id=user.account.id, currency=LibraCurrency.Coin1, up_to_version=3
+        account_id=user.account.id, currency=DiemCurrency.Coin1, up_to_version=3
     )
 
     assert len(transactions) == 3

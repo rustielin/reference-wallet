@@ -9,8 +9,8 @@ from typing import Dict
 from flask import request, Blueprint
 import context
 
-from libra import identifier, utils
-from libra_utils.types.currencies import LibraCurrency
+from diem import identifier, utils
+from diem_utils.types.currencies import DiemCurrency
 from wallet.services import account as account_service
 from wallet.services import transaction as transaction_service
 from wallet.services.transaction import get_transaction_direction
@@ -119,7 +119,7 @@ class AccountRoutes:
                 name="currency",
                 description="currency name",
                 required=False,
-                allowed_vlaues=list(LibraCurrency.__members__),
+                allowed_vlaues=list(DiemCurrency.__members__),
             ),
             query_str_param(
                 name="direction",
@@ -179,7 +179,7 @@ class AccountRoutes:
         @staticmethod
         def get_request_params():
             currency = (
-                LibraCurrency(request.args["currency"])
+                DiemCurrency(request.args["currency"])
                 if "currency" in request.args
                 else None
             )
@@ -219,7 +219,7 @@ class AccountRoutes:
                 user = self.user
                 account_id = user.account_id
 
-                currency = LibraCurrency[tx_params["currency"]]
+                currency = DiemCurrency[tx_params["currency"]]
                 amount = int(tx_params["amount"])
                 recv_address: str = tx_params["receiver_address"]
                 dest_address, dest_subaddress = identifier.decode_account(

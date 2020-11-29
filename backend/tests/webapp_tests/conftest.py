@@ -12,7 +12,7 @@ from flask.testing import FlaskClient, Client
 from wallet.services import user
 from wallet.storage import User, Token, Account
 from wallet.types import RegistrationStatus
-from libra_utils.types.currencies import FiatCurrency
+from diem_utils.types.currencies import FiatCurrency
 from webapp import app
 
 

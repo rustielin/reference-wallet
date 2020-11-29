@@ -3,7 +3,7 @@
 
 # import pytest
 #
-# from libra_utils.types.liquidity.currency import CurrencyPair, Currency
+# from diem_utils.types.liquidity.currency import CurrencyPair, Currency
 # from liquidity.fx import fixed_rates
 # from wallet.lp_client import LpClient
 #
