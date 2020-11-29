@@ -33,14 +33,14 @@ swagger_template = {
                 "address": "1 Hacker Way",
             },
         },
-        "LibraCurrencies": {"type": "string", "enum": ["Coin1"],},
+        "DiemCurrencies": {"type": "string", "enum": ["Coin1"],},
         "TransactionDirections": {"type": "string", "enum": ["received", "sent"],},
         "Transaction": {
             "type": "object",
             "properties": {
                 "id": {"type": "string"},
                 "amount": {"type": "integer"},
-                "currency": {"$ref": "#/definitions/LibraCurrencies"},
+                "currency": {"$ref": "#/definitions/DiemCurrencies"},
                 "direction": {"$ref": "#/definitions/TransactionDirections"},
                 "timestamp": {"type": "string", "format": "date-time"},
                 "source": {"$ref": "#/definitions/VaspAccountDetails"},

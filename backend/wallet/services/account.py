@@ -101,9 +101,9 @@ def _sort_transactions(
         txs.sort(key=attrgetter("created_timestamp"))
     elif sort_option == TransactionSortOption.DATE_DESC:
         txs.sort(key=attrgetter("created_timestamp"), reverse=True)
-    elif sort_option == TransactionSortOption.LIBRA_AMOUNT_ASC:
+    elif sort_option == TransactionSortOption.DIEM_AMOUNT_ASC:
         txs.sort(key=attrgetter("amount"))
-    elif sort_option == TransactionSortOption.LIBRA_AMOUNT_DESC:
+    elif sort_option == TransactionSortOption.DIEM_AMOUNT_DESC:
         txs.sort(key=attrgetter("amount"), reverse=True)
     elif sort_option == TransactionSortOption.FIAT_AMOUNT_ASC:
         _sort_transactions_by_fiat_amount(txs, fiat_currency_to_sort_by)
@@ -197,7 +197,7 @@ def generate_sub_address():
     sub_address = None
 
     while not sub_address:
-        sub_address = secrets.token_hex(identifier.LIBRA_SUBADDRESS_SIZE)
+        sub_address = secrets.token_hex(identifier.DIEM_SUBADDRESS_SIZE)
         # generated subaddress is unique
         if is_subaddress_exists(sub_address):
             sub_address = None

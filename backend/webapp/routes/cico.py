@@ -118,7 +118,7 @@ class CicoRoutes:
             return "OK", HTTPStatus.NO_CONTENT
 
     class GetRatesView(CicoView):
-        summary = "Return rates for all Fiat and Libra currency pairs"
+        summary = "Return rates for all Fiat and Diem currency pairs"
         responses = {
             HTTPStatus.OK: response_definition(
                 "currency pairs with rates", schema=RateResponse

@@ -17,7 +17,7 @@ SUPPORTED_CONVERSIONS = [
 
 
 def diem_amount_field(**kwargs) -> fields.Field:
-    """Defines Libra amount schema field"""
+    """Defines Diem amount schema field"""
     return fields.Int(
         description="Amount of microdiems",
         validate=Range(min=0),
@@ -46,16 +46,16 @@ def fiat_currency_code_field(**kwargs) -> fields.Field:
 
 
 def diem_currency_code_field(**kwargs) -> fields.Field:
-    """Defines Libra currency code schema field"""
+    """Defines Diem currency code schema field"""
     return fields.Str(
-        description="Libra currency code",
+        description="Diem currency code",
         validate=OneOf(list(DiemCurrency.__members__)),
         **kwargs,
     )
 
 
 def transaction_direction_field(**kwargs) -> fields.Field:
-    """Defines Libra currency code schema field"""
+    """Defines Diem currency code schema field"""
     return fields.Str(
         description="Transaction direction",
         validate=OneOf([td.lower() for td in list(TransactionDirection.__members__)]),
@@ -64,7 +64,7 @@ def transaction_direction_field(**kwargs) -> fields.Field:
 
 
 def transaction_status_field(**kwargs) -> fields.Field:
-    """Defines Libra currency code schema field"""
+    """Defines Diem currency code schema field"""
     return fields.Str(
         description="Transaction status",
         validate=OneOf([ts.lower() for ts in list(TransactionStatus.__members__)]),

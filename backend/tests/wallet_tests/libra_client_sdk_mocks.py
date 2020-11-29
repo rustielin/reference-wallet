@@ -183,7 +183,7 @@ class FaucetUtilsMock(BlockchainMock):
         return sequence
 
 
-class LibraNetworkMock(BlockchainMock):
+class DiemNetworkMock(BlockchainMock):
     def add_events(self, event_stream_key: str, events):
         if event_stream_key not in self.blockchain.events:
             self.blockchain.events[event_stream_key] = []

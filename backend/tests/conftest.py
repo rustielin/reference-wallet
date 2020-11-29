@@ -12,7 +12,7 @@ from typing import Dict, Optional, List, Generator
 from uuid import uuid4
 
 import pytest
-from diem.jsonrpc import Client as LibraClient, Transaction, TransactionData
+from diem.jsonrpc import Client as DiemClient, Transaction, TransactionData
 from diem.testnet import Faucet
 from diem.txnmetadata import general_metadata
 from diem import diem_types, identifier
@@ -27,7 +27,7 @@ from diem_utils.sdks.liquidity import LpClient
 from tests.setup import clear_db
 from tests.wallet_tests.diem_client_sdk_mocks import (
     FaucetUtilsMock,
-    LibraNetworkMock,
+    DiemNetworkMock,
     TransactionsMocker,
 )
 from tests.wallet_tests.services.fx.test_fx import rates
@@ -61,25 +61,25 @@ def clean_db() -> Generator[None, None, None]:
 
 @pytest.fixture(scope="function")
 def patch_blockchain(monkeypatch):
-    network = LibraNetworkMock()
+    network = DiemNetworkMock()
 
     monkeypatch.setattr(Faucet, "mint", FaucetUtilsMock.mint)
-    monkeypatch.setattr(LibraClient, "get_account", network.get_account)
+    monkeypatch.setattr(DiemClient, "get_account", network.get_account)
     monkeypatch.setattr(
-        LibraClient, "get_account_transaction", network.transaction_by_acc_seq
+        DiemClient, "get_account_transaction", network.transaction_by_acc_seq
     )
     monkeypatch.setattr(
-        LibraClient, "get_account_transactions", network.get_account_transactions,
+        DiemClient, "get_account_transactions", network.get_account_transactions,
     )
-    monkeypatch.setattr(LibraClient, "get_transactions", network.get_transactions)
-    monkeypatch.setattr(LibraClient, "get_events", network.get_events)
-    monkeypatch.setattr(LibraClient, "submit", network.sendTransaction)
+    monkeypatch.setattr(DiemClient, "get_transactions", network.get_transactions)
+    monkeypatch.setattr(DiemClient, "get_events", network.get_events)
+    monkeypatch.setattr(DiemClient, "submit", network.sendTransaction)
 
     def wait_for_transaction(*args):
         return Transaction(version=1, transaction=TransactionData(sequence_number=1))
 
     monkeypatch.setattr(
-        LibraClient, "wait_for_transaction", wait_for_transaction,
+        DiemClient, "wait_for_transaction", wait_for_transaction,
     )
 
     yield network
