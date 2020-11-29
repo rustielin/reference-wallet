@@ -430,7 +430,7 @@ components:
         created:
           type: integer
       example:
-        user_id: sunmilee@libra.com
+        user_id: sunmilee@diem.com
         subaddress: abcde
         balances:
           - currency: Coin1GBP

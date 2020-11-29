@@ -1,4 +1,4 @@
-# Copyright (c) The Libra Core Contributors
+# Copyright (c) The Diem Core Contributors
 # SPDX-License-Identifier: Apache-2.0
 
 import logging
@@ -77,7 +77,7 @@ def buy_funds(currency_pair):
     trade_id = LpClient().trade_and_execute(
         quote_id=quote.quote_id,
         direction=Direction.Buy,
-        libra_deposit_address=internal_address,
+        diem_deposit_address=internal_address,
     )
 
     if wait_for_trade_to_complete(trade_id):
@@ -116,7 +116,7 @@ def _cover_buy(order: Order, quote: QuoteData) -> bool:
     trade_id = LpClient().trade_and_execute(
         quote_id=quote.quote_id,
         direction=Direction[order.direction],
-        libra_deposit_address=deposit_address,
+        diem_deposit_address=deposit_address,
     )
     trade_info = _wait_for_trade(order=order, trade_id=trade_id)
 
@@ -133,7 +133,7 @@ def _cover_buy(order: Order, quote: QuoteData) -> bool:
     )
 
     vasp_address, internal_subaddress = decode_account(
-        deposit_address, context.get().config.libra_address_hrp()
+        deposit_address, context.get().config.diem_address_hrp()
     )
     if not _validate_blockchain_transaction(
         blockchain_version=trade_info.tx_version,

@@ -1,4 +1,4 @@
-# Copyright (c) The Libra Core Contributors
+# Copyright (c) The Diem Core Contributors
 # SPDX-License-Identifier: Apache-2.0
 
 from dataclasses import dataclass
@@ -34,8 +34,8 @@ class TransactionType(str, Enum):
 class TransactionSortOption(str, Enum):
     DATE_ASC = "date_asc"
     DATE_DESC = "date_desc"
-    LIBRA_AMOUNT_DESC = "libra_amount_desc"
-    LIBRA_AMOUNT_ASC = "libra_amount_asc"
+    LIBRA_AMOUNT_DESC = "diem_amount_desc"
+    LIBRA_AMOUNT_ASC = "diem_amount_asc"
     FIAT_AMOUNT_DESC = "fiat_amount_desc"
     FIAT_AMOUNT_ASC = "fiat_amount_asc"
 

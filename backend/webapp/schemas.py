@@ -1,4 +1,4 @@
-# Copyright (c) The Libra Core Contributors
+# Copyright (c) The Diem Core Contributors
 # SPDX-License-Identifier: Apache-2.0
 
 from itertools import chain
@@ -16,10 +16,10 @@ SUPPORTED_CONVERSIONS = [
 ]
 
 
-def libra_amount_field(**kwargs) -> fields.Field:
+def diem_amount_field(**kwargs) -> fields.Field:
     """Defines Libra amount schema field"""
     return fields.Int(
-        description="Amount of microlibras",
+        description="Amount of microdiems",
         validate=Range(min=0),
         strict=True,
         **kwargs,
@@ -45,7 +45,7 @@ def fiat_currency_code_field(**kwargs) -> fields.Field:
     )
 
 
-def libra_currency_code_field(**kwargs) -> fields.Field:
+def diem_currency_code_field(**kwargs) -> fields.Field:
     """Defines Libra currency code schema field"""
     return fields.Str(
         description="Libra currency code",
@@ -84,14 +84,14 @@ def currency_pair_field(**kwargs) -> fields.Field:
 
 class RequestForQuote(Schema):
     action = fields.Str(required=True, validate=OneOf(["buy", "sell"]))
-    amount = libra_amount_field(required=True)
+    amount = diem_amount_field(required=True)
     currency_pair = currency_pair_field(required=True)
 
 
 class Quote(Schema):
     quote_id = fields.Str(required=True)
     rfq = fields.Nested(RequestForQuote, required=True)
-    price = libra_amount_field(required=True)
+    price = diem_amount_field(required=True)
     expiration_time = fields.DateTime(required=True)
 
 
@@ -105,7 +105,7 @@ class QuoteExecution(Schema):
 
 class Rate(Schema):
     currency_pair = currency_pair_field(required=True)
-    price = libra_amount_field(required=True)
+    price = diem_amount_field(required=True)
 
 
 class RateResponse(Schema):
@@ -148,8 +148,8 @@ class DebtSettlement(Schema):
 
 
 class Balance(Schema):
-    currency = libra_currency_code_field(required=True)
-    balance = libra_amount_field(required=True)
+    currency = diem_currency_code_field(required=True)
+    balance = diem_amount_field(required=True)
 
 
 class Balances(Schema):
@@ -163,7 +163,7 @@ class UserAddress(Schema):
 
 
 class BlockchainTransaction(Schema):
-    amount = libra_amount_field()
+    amount = diem_amount_field()
     status = fields.Str()
     source = fields.Str(allow_none=True)
     destination = fields.Str(allow_none=True)
@@ -174,8 +174,8 @@ class BlockchainTransaction(Schema):
 
 class Transaction(Schema):
     id = fields.Int(required=True)
-    amount = libra_amount_field(required=True)
-    currency = libra_currency_code_field(required=True)
+    amount = diem_amount_field(required=True)
+    currency = diem_currency_code_field(required=True)
     direction = transaction_direction_field(required=True)
     status = transaction_status_field(required=True)
     timestamp = fields.Str(required=True)
@@ -187,8 +187,8 @@ class Transaction(Schema):
 
 
 class CreateTransaction(Schema):
-    currency = libra_currency_code_field(required=True)
-    amount = libra_amount_field(required=True)
+    currency = diem_currency_code_field(required=True)
+    amount = diem_amount_field(required=True)
     receiver_address = fields.Str(required=True)
 
 

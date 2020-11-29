@@ -1,6 +1,6 @@
 # pyre-ignore-all-errors
 
-# Copyright (c) The Libra Core Contributors
+# Copyright (c) The Diem Core Contributors
 # SPDX-License-Identifier: Apache-2.0
 
 
@@ -25,7 +25,7 @@ from diem_utils.types.liquidity.trade import TradeId, TradeData, Direction, Trad
 from diem_utils.sdks.liquidity import LpClient
 
 from tests.setup import clear_db
-from tests.wallet_tests.libra_client_sdk_mocks import (
+from tests.wallet_tests.diem_client_sdk_mocks import (
     FaucetUtilsMock,
     LibraNetworkMock,
     TransactionsMocker,
@@ -123,19 +123,19 @@ class LpClientMock:
         self,
         quote_id: QuoteId,
         direction: Direction,
-        libra_deposit_address: Optional[str] = None,
+        diem_deposit_address: Optional[str] = None,
         tx_version: Optional[int] = None,
     ) -> TradeId:
         quote = LpClientMock.QUOTES[quote_id]
         trade_id = TradeId(uuid4())
         metadata = diem_types.Metadata__Undefined()
-        if libra_deposit_address is not None:
-            addr, subaddr = identifier.decode_account(libra_deposit_address, "tlb")
+        if diem_deposit_address is not None:
+            addr, subaddr = identifier.decode_account(diem_deposit_address, "tlb")
             metadata = general_metadata(to_subaddress=subaddr)
         if direction == Direction.Buy:
             process_incoming_transaction(
                 sender_address="",
-                receiver_address=libra_deposit_address,
+                receiver_address=diem_deposit_address,
                 sequence=1,
                 amount=quote.amount,
                 currency=quote.rate.pair.base.value,

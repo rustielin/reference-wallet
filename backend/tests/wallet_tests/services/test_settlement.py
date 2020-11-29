@@ -1,6 +1,6 @@
 # pyre-ignore-all-errors
 
-# Copyright (c) The Libra Core Contributors
+# Copyright (c) The Diem Core Contributors
 # SPDX-License-Identifier: Apache-2.0
 
 # from datetime import datetime
@@ -31,25 +31,25 @@
 #
 #
 # class TestDebtCalculation:
-#     def test_libra_fiat_buy(self, liquidity_provider_session):
+#     def test_diem_fiat_buy(self, liquidity_provider_session):
 #         trade = make_trade(CurrencyPairs.Coin1_USD, Direction.Buy)
 #         debt = trade_to_debt(trade)
 #         assert debt.currency == Currency.USD
 #         assert debt.amount == 1000
 #
-#     def test_libra_fiat_sell(self, liquidity_provider_session):
+#     def test_diem_fiat_sell(self, liquidity_provider_session):
 #         trade = make_trade(CurrencyPairs.Coin1_USD, Direction.Sell)
 #         debt = trade_to_debt(trade)
 #         assert debt.currency == Currency.USD
 #         assert debt.amount == -1000
 #
-#     def test_fiat_libra_buy(self, liquidity_provider_session):
+#     def test_fiat_diem_buy(self, liquidity_provider_session):
 #         trade = make_trade(CurrencyPairs.EUR_Coin1, Direction.Buy)
 #         debt = trade_to_debt(trade)
 #         assert debt.currency == Currency.EUR
 #         assert debt.amount == -500
 #
-#     def test_fiat_libra_sell(self, liquidity_provider_session):
+#     def test_fiat_diem_sell(self, liquidity_provider_session):
 #         trade = make_trade(CurrencyPairs.EUR_Coin1, Direction.Sell)
 #         debt = trade_to_debt(trade)
 #         assert debt.currency == Currency.EUR

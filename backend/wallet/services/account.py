@@ -1,4 +1,4 @@
-# Copyright (c) The Libra Core Contributors
+# Copyright (c) The Diem Core Contributors
 # SPDX-License-Identifier: Apache-2.0
 
 import context, secrets
@@ -214,7 +214,7 @@ def get_deposit_address(
     return identifier.encode_account(
         context.get().config.vasp_account_address(),
         subaddress,
-        context.get().config.libra_address_hrp(),
+        context.get().config.diem_address_hrp(),
     )
 
 

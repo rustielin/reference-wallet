@@ -1,4 +1,4 @@
-# Copyright (c) The Libra Core Contributors
+# Copyright (c) The Diem Core Contributors
 # SPDX-License-Identifier: Apache-2.0
 
 import typing
@@ -25,10 +25,10 @@ class Config:
     def vasp_account_address(self) -> diem_types.AccountAddress:
         return utils.account_address(self.vasp_address)
 
-    def vasp_libra_address(self) -> LibraAddress:
-        return LibraAddress.from_hex(self.libra_address_hrp(), self.vasp_address, None)
+    def vasp_diem_address(self) -> LibraAddress:
+        return LibraAddress.from_hex(self.diem_address_hrp(), self.vasp_address, None)
 
-    def libra_address_hrp(self) -> str:
+    def diem_address_hrp(self) -> str:
         return identifier.HRPS[self.chain_id]
 
     def offchain_compliance_key(self) -> ComplianceKey:

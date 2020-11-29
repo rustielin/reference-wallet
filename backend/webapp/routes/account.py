@@ -1,6 +1,6 @@
 # pyre-ignore-all-errors
 
-# Copyright (c) The Libra Core Contributors
+# Copyright (c) The Diem Core Contributors
 # SPDX-License-Identifier: Apache-2.0
 
 from http import HTTPStatus
@@ -139,8 +139,8 @@ class AccountRoutes:
                 allowed_vlaues=[
                     "date_asc",
                     "date_desc",
-                    "libra_amount_desc",
-                    "libra_amount_asc",
+                    "diem_amount_desc",
+                    "diem_amount_asc",
                     "fiat_amount_desc",
                     "fiat_amount_asc",
                 ],
@@ -223,7 +223,7 @@ class AccountRoutes:
                 amount = int(tx_params["amount"])
                 recv_address: str = tx_params["receiver_address"]
                 dest_address, dest_subaddress = identifier.decode_account(
-                    recv_address, context.get().config.libra_address_hrp()
+                    recv_address, context.get().config.diem_address_hrp()
                 )
 
                 tx = transaction_service.send_transaction(
@@ -298,7 +298,7 @@ class AccountRoutes:
                 "full_addr": identifier.encode_account(
                     transaction.source_address,
                     transaction.source_subaddress,
-                    context.get().config.libra_address_hrp(),
+                    context.get().config.diem_address_hrp(),
                 ),
             },
             "destination": {
@@ -307,7 +307,7 @@ class AccountRoutes:
                 "full_addr": identifier.encode_account(
                     transaction.destination_address,
                     transaction.destination_subaddress,
-                    context.get().config.libra_address_hrp(),
+                    context.get().config.diem_address_hrp(),
                 ),
             },
             "is_internal": transaction.type == TransactionType.INTERNAL,

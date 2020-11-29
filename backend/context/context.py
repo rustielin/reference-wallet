@@ -1,4 +1,4 @@
-# Copyright (c) The Libra Core Contributors
+# Copyright (c) The Diem Core Contributors
 # SPDX-License-Identifier: Apache-2.0
 
 import logging, time
@@ -115,7 +115,7 @@ class Context:
 
     # ---- delegate to jsonrpc client end ----
 
-    # ---- libra transaction utils start ----
+    # ---- diem transaction utils start ----
 
     def create_transaction(
         self, script: diem_types.Script
@@ -135,7 +135,7 @@ class Context:
         sig = self.sign(utils.raw_transaction_signing_msg(txn))
         return utils.create_signed_transaction(txn, self.public_key_bytes(), sig)
 
-    # ---- libra transaction utils end ----
+    # ---- diem transaction utils end ----
 
     # ---- delegate to custody start ----
 

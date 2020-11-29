@@ -1,4 +1,4 @@
-# Copyright (c) The Libra Core Contributors
+# Copyright (c) The Diem Core Contributors
 # SPDX-License-Identifier: Apache-2.0
 
 """Cash-in/cash-out endpoints"""
@@ -134,13 +134,13 @@ class CicoRoutes:
                     if base_currency == quote_currency:
                         continue
 
-                    one_libra = Amount().deserialize(Amount.unit)
+                    one_diem = Amount().deserialize(Amount.unit)
 
                     conversion_rate = get_rate(
                         base_currency=Currency(base_currency),
                         quote_currency=Currency(quote_currency),
                     )
-                    price = one_libra * conversion_rate
+                    price = one_diem * conversion_rate
 
                     rates.append(
                         {

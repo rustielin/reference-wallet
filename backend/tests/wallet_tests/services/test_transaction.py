@@ -1,12 +1,12 @@
 # pyre-ignore-all-errors
 
-# Copyright (c) The Libra Core Contributors
+# Copyright (c) The Diem Core Contributors
 # SPDX-License-Identifier: Apache-2.0
 
 from typing import Tuple
 
 import context
-import libra_utils.types.currencies
+import diem_utils.types.currencies
 import pytest
 from diem import diem_types
 from diem.txnmetadata import general_metadata, travel_rule
@@ -288,7 +288,7 @@ def send_fake_tx(amount=100, send_to_self=False) -> Tuple[int, Transaction]:
     account_id = user.account_id
     amount = amount
     payment_type = types.TransactionType.EXTERNAL
-    currency = libra_utils.types.currencies.DiemCurrency.Coin1
+    currency = diem_utils.types.currencies.DiemCurrency.Coin1
     destination_address = "receiver_address"
     destination_subaddress = "receiver_subaddress"
 

@@ -1,4 +1,4 @@
-# Copyright (c) The Libra Core Contributors
+# Copyright (c) The Diem Core Contributors
 # SPDX-License-Identifier: Apache-2.0
 
 import context, time
@@ -14,8 +14,8 @@ from wallet.storage import get_single_transaction
 
 
 def test_send_payment_between_vasps(lrw1, lrw2, vasp1, vasp2, user1, user2):
-    sender_address = lrw1.context.config.vasp_libra_address()
-    receiver_address = lrw2.context.config.vasp_libra_address()
+    sender_address = lrw1.context.config.vasp_diem_address()
+    receiver_address = lrw2.context.config.vasp_diem_address()
     receiver_subaddress = generate_new_subaddress(account_id=user2.account_id)
 
     # setup global environment as lrw1 app

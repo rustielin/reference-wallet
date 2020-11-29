@@ -1,4 +1,4 @@
-# Copyright (c) The Libra Core Contributors
+# Copyright (c) The Diem Core Contributors
 # SPDX-License-Identifier: Apache-2.0
 
 import os
@@ -41,12 +41,12 @@ def actor_to_libra_address(actor: PaymentActor) -> LibraAddress:
 
 class LRW(BusinessContext):
     def __init__(self, context: Context):
-        self.vasp_address = context.config.vasp_libra_address()
+        self.vasp_address = context.config.vasp_diem_address()
         self.context = context
 
     def user_address(self, user_subaddress_hex: str) -> LibraAddress:
         return LibraAddress.from_hex(
-            self.context.config.libra_address_hrp(),
+            self.context.config.diem_address_hrp(),
             self.vasp_address.get_onchain_address_hex(),
             user_subaddress_hex,
         )

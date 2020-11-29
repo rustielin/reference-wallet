@@ -1,4 +1,4 @@
-# Copyright (c) The Libra Core Contributors
+# Copyright (c) The Diem Core Contributors
 # SPDX-License-Identifier: Apache-2.0
 
 from typing import Optional
@@ -456,7 +456,7 @@ def external_offchain_transaction(
 
     # off-chain logic
     sender_address = LibraAddress.from_bytes(
-        context.get().config.libra_address_hrp(),
+        context.get().config.diem_address_hrp(),
         bytes.fromhex(sender_onchain_address),
         bytes.fromhex(sender_subaddress),
     )
@@ -464,7 +464,7 @@ def external_offchain_transaction(
         f"sender address: {sender_onchain_address}, {sender_address.as_str()}, {sender_address.get_onchain().as_str()}"
     )
     receiver_address = LibraAddress.from_bytes(
-        context.get().config.libra_address_hrp(),
+        context.get().config.diem_address_hrp(),
         bytes.fromhex(receiver_address),
         bytes.fromhex(receiver_subaddress),
     )
@@ -530,15 +530,15 @@ def settle_offchain(transaction_id: int) -> None:
         and transaction.type == TransactionType.OFFCHAIN
     ):
         try:
-            libra_currency = DiemCurrency[transaction.currency]
+            diem_currency = DiemCurrency[transaction.currency]
             logger.info(
-                f"==============starting submit_onchain {libra_currency}, {transaction.amount}, "
+                f"==============starting submit_onchain {diem_currency}, {transaction.amount}, "
                 f"{transaction.destination_address}, {transaction.destination_subaddress}, "
                 f"{transaction.source_subaddress}"
             )
             reference_id = get_reference_id_from_transaction_id(transaction_id)
             jsonrpc_txn = context.get().p2p_by_travel_rule(
-                currency=libra_currency.value,
+                currency=diem_currency.value,
                 amount=transaction.amount,
                 receiver_vasp_address=transaction.destination_address,
                 off_chain_reference_id=reference_id,
@@ -569,10 +569,10 @@ def submit_onchain(transaction_id: int) -> None:
     transaction = get_transaction(transaction_id)
     if transaction.status == TransactionStatus.PENDING:
         try:
-            libra_currency = DiemCurrency[transaction.currency]
+            diem_currency = DiemCurrency[transaction.currency]
 
             jsonrpc_txn = context.get().p2p_by_general(
-                currency=libra_currency.value,
+                currency=diem_currency.value,
                 amount=transaction.amount,
                 receiver_vasp_address=transaction.destination_address,
                 receiver_sub_address=transaction.destination_subaddress,
