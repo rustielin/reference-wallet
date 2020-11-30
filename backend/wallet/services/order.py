@@ -167,9 +167,7 @@ def execute_trade(order: Order):
         receiver_id = user_account_id
 
         if not validate_balance(sender_id, order.amount, base_diem_currency):
-            buy_funds(
-                CurrencyPairs[f"{base_diem_currency}_{INVENTORY_COVER_CURRENCY}"]
-            )
+            buy_funds(CurrencyPairs[f"{base_diem_currency}_{INVENTORY_COVER_CURRENCY}"])
     else:
         sender_id = user_account_id
         receiver_id = inventory_account_id

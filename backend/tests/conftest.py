@@ -25,7 +25,7 @@ from diem_utils.types.liquidity.trade import TradeId, TradeData, Direction, Trad
 from diem_utils.sdks.liquidity import LpClient
 
 from tests.setup import clear_db
-from tests.wallet_tests.diem_client_sdk_mocks import (
+from tests.wallet_tests.client_sdk_mocks import (
     FaucetUtilsMock,
     DiemNetworkMock,
     TransactionsMocker,

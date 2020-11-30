@@ -2,7 +2,7 @@ from datetime import datetime
 
 from diem.txnmetadata import general_metadata
 from sqlalchemy_paginator import Paginator
-from tests.wallet_tests.diem_client_sdk_mocks import (
+from tests.wallet_tests.client_sdk_mocks import (
     MockEventData,
     MockEventResource,
     MockedBalance,
