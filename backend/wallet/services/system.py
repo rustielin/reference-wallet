@@ -1,7 +1,7 @@
 import logging
 import os
 
-from libra import jsonrpc, libra_types
+from diem import jsonrpc, diem_types
 from sqlalchemy import desc
 from sqlalchemy_paginator import Paginator
 from wallet.services import account as account_service, INVENTORY_ACCOUNT_NAME
@@ -176,7 +176,7 @@ def add_transaction_to_db(transaction):
 
 
 def deserialize_metadata(metadata):
-    metadata = libra_types.Metadata.lcs_deserialize(bytes.fromhex(metadata)).value.value
+    metadata = diem_types.Metadata.lcs_deserialize(bytes.fromhex(metadata)).value.value
 
     receiver_sub_address = None
     sender_sub_address = None
