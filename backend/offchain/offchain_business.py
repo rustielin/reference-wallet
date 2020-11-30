@@ -52,7 +52,7 @@ class LRW(BusinessContext):
         )
 
     def get_my_address(self):
-        """Returns this VASP's str Libra address encoded in bech32"""
+        """Returns this VASP's str Diem address encoded in bech32"""
         return self.vasp_address.as_str()
 
     def open_channel_to(self, other_vasp_info):
@@ -246,7 +246,7 @@ class LRW(BusinessContext):
         status. The command could have originated either from the other VASP
         or this VASP (see `command.origin` to determine this).
         Args:
-            other_address (str): the encoded Libra Blockchain address of the other VASP.
+            other_address (str): the encoded Diem Blockchain address of the other VASP.
             seq (int): the sequence number into the shared command sequence.
             command (ProtocolCommand): the command that lead to the new or
                 updated payment.
