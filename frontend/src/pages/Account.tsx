@@ -78,7 +78,7 @@ function Account({ match }: { match: RouterMatch<{ currency: Currency }> }) {
             </h1>
 
             <section className="my-5 text-center">
-              <Balance currency={selectedCurrency} />
+              <Balance currencyCode={selectedCurrency} />
             </section>
 
             <section className="my-5 text-center">
