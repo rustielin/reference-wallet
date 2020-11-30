@@ -10,7 +10,4 @@ COPY thirdparty/ /thirdparty/
 COPY wait.sh /
 COPY backend/ .
 
-RUN pipenv lock --requirements > requirements.txt
-
-RUN pip install -r requirements.txt
-
+RUN pipenv install --deploy --system
