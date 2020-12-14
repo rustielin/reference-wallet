@@ -1,11 +1,11 @@
-# Libra VASP Validator
+# Diem VASP Validator
 
 ## Usage
 
 Install the library:
 
 ```
-pipenv install --dev libra-vasp-validator
+pipenv install --dev diem-vasp-validator
 ```
 
 There are three conceptually different ways to use the validator:

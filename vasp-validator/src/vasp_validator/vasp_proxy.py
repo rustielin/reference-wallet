@@ -1,3 +1,6 @@
+#  Copyright (c) The Diem Core Contributors
+#  SPDX-License-Identifier: Apache-2.0
+
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from enum import Enum
