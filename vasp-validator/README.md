@@ -83,7 +83,23 @@ contains the tests that are packaged, distributed and used by the library
 user; `tests/` contains tests that test the tests. After all, quis custodiet
 ipsos custodes?
 
-### Development helper scripts
+### Testing
 
-- `test.sh` runs all the tests.
-- `lint.sh` formats and lints the code.
+`test.sh` runs all the tests. It accepts all the usual pytest arguments;
+for example this command:
+
+```shell script
+./test.sh --tb=no -r A
+```
+
+Will suppress all the traceback output but will show tests summary in the end.
+
+The first argument can be a test selection string to filter tests found in
+`vasp_validator/tests`:
+
+```shell script
+./test.sh test_send_tx::test_send_tx_no_travel_rule --tb=no -r A
+```
+
+The command will run only the test `test_send_tx_no_travel_rule` found in
+`vasp_validator/tests/test_send_tx.py`.

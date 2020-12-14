@@ -5,4 +5,11 @@
 # SPDX-License-Identifier: Apache-2.0
 #
 
-pipenv run pytest -p vasp_validator.tests.plugin --pyargs vasp_validator.tests ./tests
+# If first argument is not a flag, it's a subtest selector
+if [ "${1#-}" == "${1}" ]; then
+  subtests=$1
+  shift
+fi
+
+tests_selector=vasp_validator.tests${subtests:+.}${subtests}
+pipenv run pytest -p vasp_validator.tests.plugin --pyargs ${tests_selector} "$@" ./tests
