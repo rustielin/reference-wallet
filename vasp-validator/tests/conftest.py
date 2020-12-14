@@ -1,8 +1,6 @@
 #  Copyright (c) The Diem Core Contributors
 #  SPDX-License-Identifier: Apache-2.0
 
-import os
-
 from vasp_validator.vasp_proxy import VaspProxy
 from .vasp_proxy_testee import VaspProxyTestee
 

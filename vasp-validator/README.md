@@ -51,8 +51,11 @@ pytest -p vasp_validator.tests.plugin --pyargs vasp_validator.tests ./tests
 ```
 
 - `-p` flag loads the validation plugin for pytest, which collects the hooks.
-- `--pyargs` selects which tests to run in any granularity needed. Consult
-  pytest documentation for details.
+- `--pyargs` selects which tests to run in any granularity needed. Specifying  
+  `vasp_validator.tests` will run all the available tests that come bundled
+   with the validation tool. Consult pytest documentation for details.
+- `./tests` instructs to run the regular existing tests in your project in
+  addition to the VASP validator tests.
 
 The command will run all your tests along with all the VASP Validator tests
 and the results will appear as part of the same testing report.
@@ -79,3 +82,8 @@ both containing test cases. This is intentional: `vasp_validator/tests`
 contains the tests that are packaged, distributed and used by the library
 user; `tests/` contains tests that test the tests. After all, quis custodiet
 ipsos custodes?
+
+### Development helper scripts
+
+- `test.sh` runs all the tests.
+- `lint.sh` formats and lints the code.
