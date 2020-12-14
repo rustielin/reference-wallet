@@ -18,7 +18,7 @@ from .models import (
 )
 
 
-class LrwProxy:
+class ReferenceWalletProxy:
     def __init__(self, base_url):
         self.base_url = base_url
         self.authorization_header = {}

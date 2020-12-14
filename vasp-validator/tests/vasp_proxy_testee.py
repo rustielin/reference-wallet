@@ -7,7 +7,7 @@ import string
 from time import sleep
 
 from vasp_validator.models import TransactionStatus
-from vasp_validator.lrw_proxy import LrwProxy
+from vasp_validator.reference_wallet_proxy import ReferenceWalletProxy
 from vasp_validator.vasp_proxy import VaspProxy, TxState, TxStatus
 
 # TBD: Configure properly
@@ -16,18 +16,18 @@ LOCAL_LRW_URL = os.getenv("LOCAL_URL", "http://localhost:8080/api")
 
 class VaspProxyTestee(VaspProxy):
     def __init__(self):
-        self.lrw = LrwProxy(LOCAL_LRW_URL)
+        self.wallet = ReferenceWalletProxy(LOCAL_LRW_URL)
 
     def send_transaction(self, address, amount, currency) -> TxState:
         self.create_user()
         self.add_funds_to_local_account()
 
         # TBD: LRW should return the offchain refid, if applicable
-        tx = self.lrw.send_transaction(address, amount, currency)
+        tx = self.wallet.send_transaction(address, amount, currency)
 
         retries_count = 10
         for i in range(retries_count):
-            tx = self.lrw.get_transaction(tx.id)
+            tx = self.wallet.get_transaction(tx.id)
             if tx.status != TransactionStatus.PENDING:
                 break
             sleep(1)
@@ -57,8 +57,8 @@ class VaspProxyTestee(VaspProxy):
         amount = 900_000_000
         currency = "Coin1"
 
-        quote_id = self.lrw.create_deposit_quote(amount, "Coin1_USD").quote_id
-        self.lrw.execute_quote(quote_id)
+        quote_id = self.wallet.create_deposit_quote(amount, "Coin1_USD").quote_id
+        self.wallet.execute_quote(quote_id)
 
         if not self.wait_for_balance(amount, currency):
             raise Exception("Failed to add funds to account")
@@ -66,7 +66,7 @@ class VaspProxyTestee(VaspProxy):
     def wait_for_balance(self, amount, currency):
         retries_count = 10
         for i in range(retries_count):
-            if self.lrw.get_balance(currency) >= amount:
+            if self.wallet.get_balance(currency) >= amount:
                 return True
             sleep(1)
 
@@ -76,9 +76,9 @@ class VaspProxyTestee(VaspProxy):
         user_name = f"bondAndGurki@{get_random_string(8)}"
         password = get_random_string(12)
 
-        self.lrw.create_new_user(user_name, password)
-        user = self.lrw.get_user()
-        self.lrw.update_user(user)
+        self.wallet.create_new_user(user_name, password)
+        user = self.wallet.get_user()
+        self.wallet.update_user(user)
 
 
 def get_random_string(length):

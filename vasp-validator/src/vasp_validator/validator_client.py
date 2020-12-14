@@ -6,7 +6,7 @@ import random
 import string
 import time
 
-from .lrw_proxy import LrwProxy
+from .reference_wallet_proxy import ReferenceWalletProxy
 from .models import OffChainSequenceInfo, RegistrationStatus
 
 
@@ -16,21 +16,21 @@ class ValidatorClient:
 
     @classmethod
     def create(cls, lrw_url) -> "ValidatorClient":
-        lrw = LrwProxy(lrw_url)
+        wallet = ReferenceWalletProxy(lrw_url)
 
         user_name = f"gurkiAndBond@{get_random_string(8)}"
         password = get_random_string(12)
 
         # generate user and token in DB
         logging.info("create_new_user")
-        lrw.create_new_user(user_name, password)
+        wallet.create_new_user(user_name, password)
 
         logging.info("get_user")
-        user = lrw.get_user()
+        user = wallet.get_user()
 
         # generate account in DB
         logging.info("update_user")
-        user = lrw.update_user(
+        user = wallet.update_user(
             user,
             first_name=get_random_string(8),
             last_name=get_random_string(8),
@@ -41,11 +41,11 @@ class ValidatorClient:
             if user.registration_status == RegistrationStatus.Approved:
                 break
             time.sleep(1)
-            user = lrw.get_user()
+            user = wallet.get_user()
         else:
             raise Exception("Filed to create an approved user")
 
-        return cls(lrw)
+        return cls(wallet)
 
     def get_receiving_address(self) -> str:
         return self.lrw.get_receiving_address()
